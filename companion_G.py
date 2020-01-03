@@ -44,11 +44,6 @@ eddies_tracked = data['eddies']
 # temperature data
 z = path + nc_filename
 fileobj = Dataset(z)
-temperature = fileobj.variables['temperature'][0:num_years * days_in_year,0,:,:] - kelvin_convert
-
-# temperature data
-z = path + nc_filename
-fileobj = Dataset(z)
 temperature = fileobj.variables['temperature'][0:num_years * days_in_year,0,:,:]  - kelvin_convert
 lon = fileobj.variables['longitude'][:]
 lat = fileobj.variables['latitude'][:]

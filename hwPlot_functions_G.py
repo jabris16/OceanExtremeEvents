@@ -69,7 +69,7 @@ def hw_histograms(heatwaves, years):
     
     axs[2].hist(category, weights = np.ones(len(category)) / len(category) * 100, histtype = 'stepfilled', color = 'r')
     axs[2].set_xlabel('MHW Category')
-    axs[2].set_ylabel('Number of MHW events')
+    axs[2].set_ylabel('% MHW events')
     axs[2].set_title('C) Category Distribution', loc = 'left')
     
     # d) incidence (yearly bins)

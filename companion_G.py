@@ -42,7 +42,7 @@ data = np.load(path + 'eddy_track_' + run + '.npz') # 'encoding' may be required
 eddies_tracked = data['eddies']
 
 # temperature data
-z = path + 'dataset-global-reanalysis-phy-001-025-ran-fr-glorys2v4-daily_1575888176197.nc'
+z = path + nc_filename
 fileobj = Dataset(z)
 temperature = fileobj.variables['temperature'][0:num_years * days_in_year,0,:,:] - kelvin_convert
 

@@ -49,12 +49,6 @@ lon = fileobj.variables['longitude'][:]
 lat = fileobj.variables['latitude'][:]
 t = (fileobj.variables['time'][0:num_years * days_in_year] - 376956) / 24 # [days]
 
-# climatological region 
-lon1 = lon[0] # min longitude
-lon2 = lon[-1] # max longitude
-lat1 = lat[0] # min latitude
-lat2 = lat[-1] # max latitude
-
 #****************************************************************
 # execute functions (use/remove as necessary)
 

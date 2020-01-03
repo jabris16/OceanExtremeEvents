@@ -1,6 +1,6 @@
 '''
 
-STILL IN PROGRESS.
+IN PROGRESS.
 
 General heatwave plots.
 
@@ -16,7 +16,23 @@ from matplotlib import pyplot as plt
 
 # FUNCTIONS
 
-def hw_histograms(heatwaves):
+def hw_histograms(heatwaves, years):
+    
+    '''
+    MHW metric plots. Using output from 'heatwave_functions_G.py'.
+    
+    INPUT:
+    heatwaves = dataset of MHW metrics, from 'heatwave_functions_G.py'
+    years = number of years in the analysis period
+    
+    OUTPUTS:
+    Plots of MHW metrics
+    'Duration' = histogram of MHW duration distribution across the analysis period
+    'Max Intensity' = histogram of maximum SST anomaly (relative to MHW threshold) during MHW events distribution across the analysis period
+    'Category' = histogram of MHW category distribution across the analysis period (categories based on Hobday et al., 2016, Oceanography)
+    'Incidence' = MHW count in each year of the analysis period (counted in yearly bins)
+    
+    '''
     
     duration = []
     max_intensity = []
@@ -28,7 +44,7 @@ def hw_histograms(heatwaves):
         for ev in range(len(heatwaves[grid]['duration'])):
             duration.append(heatwaves[grid]['duration'][ev])
             max_intensity.append(heatwaves[grid]['intensity_max_relThresh'][ev])
-            time.append(heatwaves[grid]['time_start'][ev])
+            time.append(heatwaves[grid]['time_start'][ev] / 365)
             category.append(heatwaves[grid]['category'][ev])
     
     # set up figure
@@ -55,11 +71,12 @@ def hw_histograms(heatwaves):
     axs[2].set_xlabel('MHW Category')
     axs[2].set_ylabel('Number of MHW events')
     axs[2].set_title('C) Category Distribution', loc = 'left')
-     
-    # d) incidence
     
-    axs[3].hist(time, histtype = 'step', color = 'r')
-    axs[3].set_xlabel('Time (days)')
+    # d) incidence (yearly bins)
+    
+    n, x, _ = plt.hist(time, bins = np.linspace(0, years, years), histtype = 'stepfilled', color = 'w')
+    bin_centers = 0.5 * (x[1:] + x[:-1])
+    axs[3].plot(bin_centers, n, color = 'r')
+    axs[3].set_xlabel('Time since 1 Jan 1993 (years)')
     axs[3].set_ylabel('Number of MHW events')
     axs[3].set_title('D) Incidence over time', loc = 'left')
-

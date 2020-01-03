@@ -89,7 +89,7 @@ def mhw_metrics(field, clim_thresh, clim_mean, lat, lon, t):
 
     Calculating Marine Heatwave Metrics.
 
-    Using some functions that are based on those by Eric Oliver in marineHeatwaves (see Github)
+    Using some functions that are based on those by Eric Oliver in marineHeatwaves (https://github.com/ecjoliver/marineHeatWaves/blob/master/marineHeatWaves.py)
     Expands on Eric Oliver code by applying the methods to all grid cells within a given climatological region.
 
     INPUT:
@@ -101,8 +101,8 @@ def mhw_metrics(field, clim_thresh, clim_mean, lat, lon, t):
     t = array of time values corresponding to 'field' 
     
     OUTPUT:
-    heatwaves = dataset of marine heatwave metrics including
-    See Eric Oliver marineHeatwaves (Github) for detailed description of metrics and methods for calculation
+    heatwaves = dataset of marine heatwave metrics
+    *** For more detailed outputs information see Eric Oliver marineHeatwaves 'outputs' (https://github.com/ecjoliver/marineHeatWaves/blob/master/marineHeatWaves.py) 
     
     '''
     

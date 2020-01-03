@@ -30,7 +30,7 @@ def hw_histograms(heatwaves, years):
     'Duration' = histogram of MHW duration distribution across the analysis period
     'Max Intensity' = histogram of maximum SST anomaly (relative to MHW threshold) during MHW events distribution across the analysis period
     'Category' = histogram of MHW category distribution across the analysis period (categories based on Hobday et al., 2016, Oceanography)
-    'Incidence' = MHW count in each year of the analysis period (counted in yearly bins)
+    'Incidence' = MHW count in each year of the analysis period (number of events counted in yearly bins)
     
     '''
     

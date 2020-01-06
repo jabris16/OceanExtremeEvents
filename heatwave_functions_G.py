@@ -20,9 +20,7 @@ import scipy.ndimage as ndimage
 ###############################################
 
 def clim_calcs(field, num_yearsCLIM, pctile):
-    
-    ### option for daily, weekly, monthly etc ###
-    
+       
     ''' 
 
     Heatwave analysis.
@@ -30,7 +28,7 @@ def clim_calcs(field, num_yearsCLIM, pctile):
     function to calculate the mean and specified threshold value for each grid cell across each day of a year over a given climatological period, where: 
        
     INPUT:
-    field = SST dataset in array format of shape e.g. temperature[time,lat,lon] where time is a multiple of 365 (i.e. complete years)
+    field = daily SST dataset in array format of shape e.g. temperature[time,lat,lon] where time is a multiple of 365 (i.e. complete years)
     num_yearsCLIM = time length [years] of the climatological mean/threshold period, first x years of the 'field' dataset for example
     pctile = specified percentile to compute
     
@@ -38,9 +36,10 @@ def clim_calcs(field, num_yearsCLIM, pctile):
     clim_mean = 3D array (of shape [365, len(lat), len(lon)] of mean SST for each grid cell averaged for each day of the year across the climatological period
     clim_thresh = 3D array (of shape [365, len(lat), len(lon)] of threshold percentile SST for each grid cell calulated for each day of the year across the climatological period
     
-    *** TO FOLLOW: UPDATE TO PROCESS LEAP YEARS, I.E. SO 'FIELD' DOES NOT NEED TO BE A MULTIPLE OF 365 ***
-
-    
+    *** TO FOLLOW: UPDATE TO PROCESS LEAP YEARS, I.E. SO 'FIELD' DOES NOT NEED TO BE A MULTIPLE OF 365
+        UPDATE TO INCLUDE OPTION USE WEEKLY, MONTHLY DATA AS WELL AS DAILY ***
+        
+        
     '''
     
     print('Starting clim_calcs():')

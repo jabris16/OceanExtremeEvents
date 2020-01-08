@@ -14,8 +14,8 @@ Jamie Atkins
 
 import numpy as np
 from netCDF4 import Dataset
-import heatwave_functions
-import eddySupp_functions
+import heatwave_functions_G
+import eddySuppli_functions_G
 
 #****************************************************************
 
@@ -53,10 +53,10 @@ t = (fileobj.variables['time'][0:num_years * days_in_year] - 376956) / 24 # [day
 # execute functions (use/remove as necessary)
 
 # general heatwaves
-clim_thresh, clim_mean = heatwave_functions.clim_calcs(temperature, num_yearsCLIM, pctile)
-heatwaves = heatwave_functions.mhw_metrics(temperature, clim_thresh, clim_mean, lat, lon, t)
+clim_thresh, clim_mean = heatwave_functions_G.clim_calcs(temperature, num_yearsCLIM, pctile)
+heatwaves = heatwave_functions_G.mhw_metrics(temperature, clim_thresh, clim_mean, lat, lon, t)
 
 # eddyHeatwaves
 
-eddies, eddies_a, eddies_c = eddySupp_functions.eddy_census_calc(eddies_tracked, temperature, lon, lat, clim_mean)
-sst_absolute_a, sst_anom_a, amp_a, scale_a, rot_velocity_a = eddySupp_functions.eddy_plotready(eddies_a)
+eddies, eddies_a, eddies_c = eddySuppli_functions_G.eddy_census_calc(eddies_tracked, temperature, lon, lat, clim_mean)
+sst_absolute_a, sst_anom_a, amp_a, scale_a, rot_velocity_a = eddySuppli_functions_G.eddy_plotready(eddies_a)

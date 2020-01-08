@@ -23,7 +23,7 @@ import eddySuppli_functions_G
 
 pctile = 90 # percentile threshold of choice (90% in line with Hobday et al., 2016)
 num_yearsCLIM = 5 # time length [years] of the climatological mean/threshold period
-resolution = 0.25 # model spatial resolution
+resolution = 0.25 # model spatial resolution [degrees]
 num_years = 23 # number of years of analysis
 days_in_year = 365 # number of days in a year
 

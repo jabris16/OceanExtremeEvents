@@ -58,5 +58,5 @@ heatwaves = heatwave_functions_G.mhw_metrics(temperature, clim_thresh, clim_mean
 
 # eddyHeatwaves
 
-eddies, eddies_a, eddies_c = eddySuppli_functions_G.eddy_census_calc(eddies_tracked, temperature, lon, lat, clim_mean)
+eddies, eddies_a, eddies_c = eddySuppli_functions_G.eddy_census_calc(eddies_tracked, temperature, lon, lat, clim_mean, resolution)
 sst_absolute_a, sst_anom_a, amp_a, scale_a, rot_velocity_a = eddySuppli_functions_G.eddy_plotready(eddies_a)

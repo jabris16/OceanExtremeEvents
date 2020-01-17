@@ -216,3 +216,92 @@ def mhw_metrics(field, clim_thresh, clim_mean, lat, lon, t):
             heatwaves.append(mhw)
 
     return heatwaves
+
+###############################
+
+ ### CUMULATIVE MHW AREA ###
+
+###############################
+ 
+def mhw_area(heatwaves, grid_area, years, t):
+
+    '''
+    
+    Function for calculating the total cumulative area (km2) experiencing MHW conditions per year (MHW threshold as defined by Hobday et al. 2016).
+
+    INPUTS:
+    heatwaves = dataset of MHW metrics, from 'heatwave_functions_G.py'
+    grid_area = NetCDF file of the area (km2) of each grid cell within the analysis domain the format (lat, lon)
+        N.B. this can be prduced with CDO 'gridarea' function and an existing NetCDF file containing data across the analysis domain
+    years = time length of analysis period [years]
+    t = array of timesteps in analysis period
+    
+    OUPUTS:
+    area = array of total area (km2) covered by MHW conditions at each timestep across the analysis period
+    area_yearly = array of cumulative area covered by MHW conditions in yearly bins across the analysis period
+
+    '''
+    
+    # CONSTANTS and LISTS
+    m2_to_km2_convert = 1000000 # conversion factor between m2 and km2
+    days_in_year = 365 # number of days in a year
+    t_len = years * 365
+    grid_timestore = []
+    area_store = []
+    time_area = []
+    area_sum = []
+    area_yearly = []
+    
+    # CALCULATE MHW AREA AT EACH TIME STEP
+    
+    # assign the timestep of each heatwave incidence to a list
+    for grid in range(len(heatwaves)):
+        time_store = []
+        for ev in range(len(heatwaves[grid]['duration'])):
+            time_store.append(range(int(heatwaves[grid]['time_start'][ev]),int(heatwaves[grid]['time_end'][ev])))
+        grid_timestore.append(time_store)
+    
+    # assign the area of each grid cell to a list in format to match len(heatwave) which is total number of cells in analysis region
+    for x in range(len(grid_area[:,0])):
+        for y in range(len(grid_area[0,:])):
+            area_store.append(grid_area[x,y])
+    
+    # assign the area of each grid cell which is experiencing heatwave conditions at a given timestep to a list of len(total number of timesteps) to the index of the timestep in which the conditions are occuring
+    # N.B. this runs quite slow...
+    for i in range(t_len):
+        print(str(i) + ' of ' + str(t_len - 1))
+        areas = []
+        for grid in range(len(grid_timestore)):
+            for ev in range(len(grid_timestore[grid])):
+                for x in range(len(grid_timestore[grid][ev])):
+                    if grid_timestore[grid][ev][x] == t[i]:
+                        areas.append(area_store[grid])
+                    else:
+                        pass
+        time_area.append(areas)
+    
+    # sum the areas of each grid cell experiencing heatwave conditions at a given timestep
+    # N.B. each index of area_sum corresponds to a time step, i.e area_sum[0] = 1st timestep
+    for i in range(t_len):
+        area_add = np.sum(time_area[i])
+        area_sum.append(area_add)
+    
+    area_km = area_sum / m2_to_km2_convert # convert to km2
+
+    # calculate yearly cumulative area (i.e. cumulative area in yearly bins)
+    for i in range(years):
+        if i == 0:
+            area_yearly.append(np.sum(area_km[i * days_in_year:days_in_year - 1]))
+        else:
+            area_yearly.append(np.sum(area_km[i * days_in_year:i * (days_in_year -1) + days_in_year]))
+    area_yearly_np = np.array(area_yearly)
+    area_yearly = area_yearly_np
+
+    # SAVE OUTPUT
+    # each timestep
+    area = np.array(area_km)
+    np.savez('area_timestep', area = area)  
+    # yearly bins
+    np.savez('area_yearly', area_yearly = area_yearly)
+    
+    return area, area_yearly

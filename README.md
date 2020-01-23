@@ -6,7 +6,7 @@ Functions to be used for analysis of marine heatwaves and eddy-specific marine h
 
 | File | Description |
 | ---- | ----------- |
-| eddySuppli_functions_G.py | Functions for eddy specific heatwave analysis |
+| eddyHW_suppliFunctions_G.py | Functions for eddy specific heatwave analysis |
 | heatwave_functions_G.py | Functions for general heatwave analysis |
 | hwPlot_functions_G.py | Heatwave data plotting|
 | companion_G.py | File for setting parameter values, loading data and executing functions from above files |

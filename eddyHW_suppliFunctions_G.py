@@ -1,5 +1,7 @@
 '''
 
+N.B. THESE FUNCTIONS ARE MESSY, NEED UPDATING
+
 Functions for eddy-specific heatwave analysis.
 
 Jamie Atkins

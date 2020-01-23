@@ -32,7 +32,6 @@ def eddy_census_calc(eddies_tracked, field, lon, lat, clim_mean, spat_res):
     lat = array of latitude values corresponding to 'field'
     lon = array of longitude values corresponding to 'field'
     clim_mean = mean SST value for each grid cell across each day of the year
-    num_years = number of years to calculate the climatological period over (adjust as necessary)
     spat_res = model spatial resolution (adjust as necessary) [degrees]; ideally 0.25 (eddy-permitting) or higher
     
     OUTPUT:
